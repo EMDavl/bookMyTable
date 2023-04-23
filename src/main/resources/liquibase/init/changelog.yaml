@@ -1,0 +1,11 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1.0
+      author: e.davlyatov
+      comment: Schema initialization
+      dbms: postgresql
+      changes:
+        - sqlFile:
+            dbms: postgresql
+            relativeToChangeLogFile: true
+            path: scripts/schema.sql

@@ -1,0 +1,28 @@
+networks:
+  bmt-network:
+
+services:
+  postgres:
+    container_name: bmt-postgres
+    image: postgres:15.2-alpine3.17
+    environment:
+      POSTGRES_PASSWORD: password
+      POSTGRES_USER: postgres
+      POSTGRES_DB: book_my_table
+    ports:
+      - "5432:5432"
+    networks:
+      - bmt-network
+  application:
+    container_name: bmt-app
+    ports:
+      - "8080:8080"
+    depends_on:
+      - postgres
+    environment:
+      DB_PASSWORD: password
+      DATASOURCE_URL: jdbc:postgresql://postgres:5432/book_my_table
+    build:
+      context: ../
+    networks:
+      - bmt-network
