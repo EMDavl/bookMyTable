@@ -1,0 +1,7 @@
+GET localhost:8080/hello-world
+Authorization: Bearer esfsefes
+###
+GET localhost:8080/hello-world
+Authorization: esfsefes
+###
+GET localhost:8080/hello-world

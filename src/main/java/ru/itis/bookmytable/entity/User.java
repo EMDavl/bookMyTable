@@ -2,6 +2,7 @@ package ru.itis.bookmytable.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -9,9 +10,10 @@ import java.util.Set;
 
 @Entity
 @Table(schema = "public", name = "users")
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
+@Builder
 public class User {
 
     @Id

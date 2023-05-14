@@ -1,4 +1,6 @@
 spring:
+  cache:
+    cache-names: USER_BY_USERNAME
   jpa:
     database: postgresql
     open-in-view: false
