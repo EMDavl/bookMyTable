@@ -11,7 +11,7 @@ import static org.springframework.data.jpa.repository.EntityGraph.EntityGraphTyp
 public interface UserRepository extends JpaRepository<User, Long> {
 
     @EntityGraph(type = LOAD, attributePaths = "roles")
-    Optional<User> findByEmail(String email);
+    Optional<User> findByPhoneNumber(String phoneNumber);
 
-    boolean existsByEmailIgnoreCase(String email);
+    boolean existsByPhoneNumberIgnoreCase(String phoneNumber);
 }

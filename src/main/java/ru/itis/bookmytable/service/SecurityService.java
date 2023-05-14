@@ -29,12 +29,12 @@ public class SecurityService {
 
     @Transactional
     public JwtTokenResponse signUp(SignUpRequest request) {
-        if (userRepository.existsByEmailIgnoreCase(request.getEmail())) {
+        if (userRepository.existsByPhoneNumberIgnoreCase(request.getPhoneNumber())) {
             throw new WrongRequestException("Email is already taken");
         }
 
         User user = User.builder()
-                .email(request.getEmail())
+                .phoneNumber(request.getPhoneNumber())
                 .password(passwordEncoder.encode(request.getPassword()))
                 .firstName(request.getFirstName())
                 .lastName(request.getLastName())
@@ -42,20 +42,20 @@ public class SecurityService {
                 .build();
 
         User savedUser = userRepository.save(user);
-        return new JwtTokenResponse(tokenService.createToken(savedUser.getEmail(), savedUser.getId(), RoleNames.USER));
+        return new JwtTokenResponse(tokenService.createToken(savedUser.getPhoneNumber(), savedUser.getId(), RoleNames.USER));
     }
 
 
     @Transactional
     public JwtTokenResponse signIn(SignInRequest request) {
-        User user = userRepository.findByEmail(request.getEmail())
+        User user = userRepository.findByPhoneNumber(request.getPhoneNumber())
                 .orElseThrow(() -> new WrongRequestException("Wrong email or password"));
 
         if (!passwordEncoder.matches(request.getPassword(), user.getPassword())) {
             throw new WrongRequestException("Wrong email or password");
         }
 
-        return new JwtTokenResponse(tokenService.createToken(user.getEmail(), user.getId(), user.getRoles().stream().map(Role::getName).toList()));
+        return new JwtTokenResponse(tokenService.createToken(user.getPhoneNumber(), user.getId(), user.getRoles().stream().map(Role::getName).toList()));
     }
 
     public void logout(String token) {

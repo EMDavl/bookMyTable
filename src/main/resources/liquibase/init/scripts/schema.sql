@@ -8,11 +8,11 @@ CREATE SEQUENCE IF NOT EXISTS token_id_seq START WITH 1;
 
 CREATE TABLE IF NOT EXISTS users
 (
-    id         int PRIMARY KEY DEFAULT (nextval('user_id_seq')),
-    password   varchar(256),
-    email      varchar(256) UNIQUE,
-    first_name varchar(128),
-    last_name  varchar(128)
+    id           int PRIMARY KEY DEFAULT (nextval('user_id_seq')),
+    password     varchar(256),
+    phone_number varchar(12) UNIQUE,
+    first_name   varchar(128),
+    last_name    varchar(128)
 );
 
 CREATE TABLE IF NOT EXISTS tokens

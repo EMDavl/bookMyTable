@@ -6,6 +6,5 @@ databaseChangeLog:
       dbms: postgresql
       changes:
         - sqlFile:
-            dbms: postgresql
             relativeToChangeLogFile: true
             path: scripts/schema.sql

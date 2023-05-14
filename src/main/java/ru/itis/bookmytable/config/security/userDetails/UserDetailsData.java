@@ -9,12 +9,12 @@ import java.util.Collection;
 
 public class UserDetailsData implements UserDetails {
 
-    private final String username;
+    private final String phoneNumber;
     private final String password;
     private final Collection<SimpleGrantedAuthority> authorities;
 
     public UserDetailsData(User user) {
-        this.username = user.getEmail();
+        this.phoneNumber = user.getPhoneNumber();
         this.password = user.getPassword();
         this.authorities = user.getRoles().stream()
                 .map(role -> new SimpleGrantedAuthority(role.getName()))
@@ -33,7 +33,7 @@ public class UserDetailsData implements UserDetails {
 
     @Override
     public String getUsername() {
-        return username;
+        return phoneNumber;
     }
 
     @Override

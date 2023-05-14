@@ -75,9 +75,9 @@ public class JwtTokenService {
         return tokenValue;
     }
 
-    public String createToken(String email, Long id, List<String> roles) {
+    public String createToken(String phoneNumber, Long id, List<String> roles) {
         String tokenValue = Jwts.builder()
-                .setSubject(email)
+                .setSubject(phoneNumber)
                 .claim("id", id)
                 .claim("role", roles)
                 .compact();

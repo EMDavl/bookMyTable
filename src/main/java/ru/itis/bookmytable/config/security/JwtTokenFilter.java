@@ -2,6 +2,7 @@ package ru.itis.bookmytable.config.security;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
+import io.jsonwebtoken.JwtException;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -19,6 +20,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 import ru.itis.bookmytable.dto.CommonResponseEntity;
 import ru.itis.bookmytable.exceptions.JwtAuthenticationException;
+import ru.itis.bookmytable.exceptions.TokenRevokedException;
 import ru.itis.bookmytable.service.JwtTokenService;
 
 import java.io.IOException;
@@ -62,7 +64,7 @@ public class JwtTokenFilter extends OncePerRequestFilter {
                 throw new JwtAuthenticationException(NOT_BEARER_PREFIX_MSG);
             }
             processToken(token);
-        } catch (Exception e) {
+        } catch (JwtAuthenticationException | TokenRevokedException | JwtException e) {
             log.error("Failed to authenticate user", e);
             sendErrorResponse(response, e.getMessage());
             return;

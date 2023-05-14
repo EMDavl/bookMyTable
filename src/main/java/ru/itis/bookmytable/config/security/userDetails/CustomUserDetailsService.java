@@ -15,12 +15,12 @@ import ru.itis.bookmytable.repository.UserRepository;
 public class CustomUserDetailsService implements UserDetailsService {
 
     private final UserRepository userRepository;
-    private final String NOT_FOUND_MESSAGE = "User with provided email %s is not found";
+    private final String NOT_FOUND_MESSAGE = "User with provided phone number %s is not found";
 
     @Override
     @Cacheable(cacheNames = "USER_BY_USERNAME")
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return new UserDetailsData(userRepository.findByEmail(username)
-                .orElseThrow(() -> new UsernameNotFoundException(NOT_FOUND_MESSAGE.formatted(username))));
+    public UserDetails loadUserByUsername(String phoneNumber) throws UsernameNotFoundException {
+        return new UserDetailsData(userRepository.findByPhoneNumber(phoneNumber)
+                .orElseThrow(() -> new UsernameNotFoundException(NOT_FOUND_MESSAGE.formatted(phoneNumber))));
     }
 }
