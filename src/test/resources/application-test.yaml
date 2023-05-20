@@ -1,0 +1,27 @@
+spring:
+  cache:
+    cache-names: USER_BY_USERNAME
+  jpa:
+    database: h2
+    open-in-view: false
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: none
+  liquibase:
+    password: bmt_to_the_moon
+    user: h2_user
+    url: jdbc:h2:mem:testdb
+    change-log: classpath:liquibase/changelog.yaml
+  datasource:
+    hikari:
+      maximum-pool-size: 10
+      driver-class-name: org.h2.Driver
+      password: bmt_to_the_moon
+      username: h2_user
+      jdbc-url: jdbc:h2:mem:testdb
+    url: jdbc:h2:mem:testdb
+    password: bmt_to_the_moon
+    username: h2_user
+    driver-class-name: org.h2.Driver

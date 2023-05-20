@@ -1,6 +1,7 @@
 package ru.itis.bookmytable.config.security.userDetails;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.context.annotation.Primary;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -17,6 +18,7 @@ public class CustomUserDetailsService implements UserDetailsService {
     private final String NOT_FOUND_MESSAGE = "User with provided email %s is not found";
 
     @Override
+    @Cacheable(cacheNames = "USER_BY_USERNAME")
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         return new UserDetailsData(userRepository.findByEmail(username)
                 .orElseThrow(() -> new UsernameNotFoundException(NOT_FOUND_MESSAGE.formatted(username))));

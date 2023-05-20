@@ -3,7 +3,6 @@ package ru.itis.bookmytable.config.security.userDetails;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import ru.itis.bookmytable.entity.Role;
 import ru.itis.bookmytable.entity.User;
 
 import java.util.Collection;

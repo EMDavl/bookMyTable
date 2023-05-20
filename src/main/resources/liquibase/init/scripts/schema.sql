@@ -4,20 +4,28 @@ CREATE SEQUENCE IF NOT EXISTS reservation_id_seq START WITH 1;
 CREATE SEQUENCE IF NOT EXISTS restaurant_id_seq START WITH 1;
 CREATE SEQUENCE IF NOT EXISTS review_id_seq START WITH 1;
 CREATE SEQUENCE IF NOT EXISTS image_id_seq START WITH 1;
+CREATE SEQUENCE IF NOT EXISTS token_id_seq START WITH 1;
 
 CREATE TABLE IF NOT EXISTS users
 (
     id         int PRIMARY KEY DEFAULT (nextval('user_id_seq')),
     password   varchar(256),
-    email      varchar(256),
+    email      varchar(256) UNIQUE,
     first_name varchar(128),
     last_name  varchar(128)
+);
+
+CREATE TABLE IF NOT EXISTS tokens
+(
+    id      int PRIMARY KEY DEFAULT (nextval('token_id_seq')),
+    value   text UNIQUE,
+    revoked boolean
 );
 
 CREATE TABLE IF NOT EXISTS roles
 (
     id   int PRIMARY KEY DEFAULT (nextval('role_id_seq')),
-    name text
+    name text UNIQUE
 );
 
 CREATE TABLE IF NOT EXISTS users_roles
